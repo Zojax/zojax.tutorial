@@ -1,0 +1,21 @@
+<tal:block tal:define="base_url request/URL; batch nocall:view/messages">
+  <tal:block metal:use-macro="macro:batch-navigation" />
+</tal:block>
+
+<div class="frame" tal:repeat="idx python:range(len(view.messages))"
+     tal:attributes="class python:repeat['idx'].even() and 'frame even' or 'frame odd'">
+  <tal:block tal:define="context python:view.messages[idx]">
+    <h1 tal:content="context/title">Title</h1>
+    <div class="z-content-byline" tal:define="byline provider:content.byline"
+	 tal:condition="byline" tal:content="structure byline"></div>
+
+    <tal:block content="structure context/@@index.html/render" />
+  </tal:block>
+</div>
+
+<fieldset class="z-form frame small"
+	  tal:define="reply nocall:context/@@reply.html" tal:condition="nocall:reply">
+  <legend>Quick reply</legend>
+  
+  <tal:block content="structure reply/render" />
+</fieldset>

@@ -1,0 +1,80 @@
+<configure 
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax">
+
+  <!-- namechooser for idgenerator -->
+  <adapter factory=".idgenerator.NameChooser" />
+
+  <!-- Message content type -->
+  <zojax:content
+     name="zojax.tutorial.Message"
+     schema=".interfaces.IMessage"
+     class=".message.Message"
+     title="Message"
+     description="Message for MessageBoard"
+     containers="zojax.tutorial.Topic"
+     permission="zojax.AddContent" />
+
+  <class class=".message.Message">
+    <require
+       permission="zope.View"
+       attributes="description"
+       interface=".interfaces.IMessage" />
+
+    <require
+       permission="zojax.ModifyContent"
+       set_schema=".interfaces.IMessage" />
+  </class>
+
+  <!-- Topic content type -->
+  <zojax:content
+     name="zojax.tutorial.Topic"
+     schema=".interfaces.ITopic"
+     class=".topic.Topic"
+     title="Topic"
+     description="Very simple topic"
+     contains="zojax.tutorial.Message"
+     containers="zojax.tutorial.MessageBoard"
+     permission="zojax.AddContent" />
+
+  <class class=".topic.Topic">
+    <implements interface="zope.app.container.interfaces.IContainerNamesContainer" />
+
+    <require
+       permission="zope.View"
+       interface=".interfaces.ITopic
+		  zope.app.container.interfaces.IReadContainer" />
+
+    <require
+       permission="zojax.ModifyContent"
+       set_schema=".interfaces.ITopic"
+       interface="zope.app.container.interfaces.IWriteContainer" />
+  </class>
+
+  <!-- MessageBoard content type -->
+  <zojax:content
+     name="zojax.tutorial.MessageBoard"
+     schema=".interfaces.IMessageBoard"
+     class=".messageboard.MessageBoard"
+     title="MessageBoard"
+     description="Very simple MessageBoard"
+     contains="zojax.tutorial.Topic"
+     permission="zojax.AddContent" />
+
+  <class class=".messageboard.MessageBoard">
+    <implements interface="zope.app.container.interfaces.IContainerNamesContainer" />
+
+    <require
+       permission="zope.View"
+       interface=".interfaces.IMessageBoard
+		  zope.app.container.interfaces.IReadContainer" />
+
+    <require
+       permission="zojax.ModifyContent"
+       set_schema=".interfaces.IMessageBoard"
+       interface="zope.app.container.interfaces.IWriteContainer" />
+  </class>
+
+  <include package=".browser" />
+
+</configure>

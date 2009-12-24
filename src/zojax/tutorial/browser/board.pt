@@ -1,0 +1,25 @@
+<strong>
+  <a tal:condition="view/allowAddTopic" href="+/zojax.tutorial.Topic/">
+    Creaet new topic
+  </a>
+</strong>
+
+<tal:block tal:define="base_url request/URL; batch nocall:view/topics">
+  <tal:block metal:use-macro="macro:batch-navigation" />
+</tal:block>
+
+<div tal:repeat="idx python:range(len(view.topics))">
+  <div class="frame" tal:define="context python:view.topics[idx]"
+       tal:attributes="class python:repeat['idx'].even() and 'frame even' or 'frame odd'">
+    <h1><a tal:attributes="href context/__name__"
+	   tal:content="context/title">Title</a></h1>
+    <div class="z-content-byline" tal:define="byline provider:content.byline"
+	 tal:condition="byline" tal:content="structure byline"></div>
+
+    <div class="pageDescription" content="context/description" />
+    <div>
+      <strong>Posts:</strong>
+      <tal:block content="python:len(context)" />
+    </div>
+  </div>
+</div>

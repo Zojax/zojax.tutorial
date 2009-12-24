@@ -1,0 +1,73 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser">
+
+  <!-- icons -->
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.tutorial.interfaces.IMessage"
+     file="message.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.content.zojax_tutorial_Message"
+     file="message.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.tutorial.interfaces.IMessageBoard"
+     file="messageboard.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.content.zojax_tutorial_MessageBoard"
+     file="messageboard.png" />
+
+  <!-- messageboard view -->
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IMessageBoard" />
+
+  <browser:page
+     name="index.html"
+     for="..interfaces.IMessageBoard"
+     template="board.pt"
+     class=".board.MessageBoardView"
+     permission="zope.View" />
+
+  <!-- topic views -->
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.ITopic" />
+
+  <browser:page
+     name="index.html"
+     for="zojax.content.zojax_tutorial_Topic"
+     class=".topicadd.AddTopicForm"
+     permission="zojax.AddContent" />
+
+  <browser:page
+     name="index.html"
+     for="..interfaces.ITopic"
+     template="topic.pt"
+     class=".topic.TopicView"
+     permission="zope.View" />
+
+  <browser:page
+     name="reply.html"
+     for="..interfaces.ITopic"
+     class=".reply.ReplyForm"
+     permission="zope.Public" />
+
+  <!-- message views -->
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IMessage" />
+
+  <browser:page
+     name="index.html"
+     for="..interfaces.IMessage"
+     class=".message.MessageView"
+     permission="zope.View" />
+
+</configure>
