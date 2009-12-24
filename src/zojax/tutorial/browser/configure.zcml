@@ -1,0 +1,25 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.tutorial.interfaces.IMessage"
+     file="message.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.content.zojax_tutorial_Message"
+     file="message.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.tutorial.interfaces.IMessageBoard"
+     file="messageboard.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.content.zojax_tutorial_MessageBoard"
+     file="messageboard.png" />
+
+</configure>
